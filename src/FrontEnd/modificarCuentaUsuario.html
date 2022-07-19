@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Modificar Usuario')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">	
+	
+	<!-- Dropdown Structure USUARIO -->
+	<ul th:replace="fragments/parts::dropdown1"></ul>
+	<!-- Dropdown Structure USUARIO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown2"></ul>
+	
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" style="font-weight: bold">Modificación Usuario</h4>
+			
+			<form th:action="@{/usuario/modificarCuentaUsuario}" th:object="${usuario}" method="post">
+			
+				<div class="input-field col l6 col-m6" style="display: none">					
+					<input	type="text" name="id" id="id" th:field="*{id_rol}" required/>
+					<label for="id">Id Usuario</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6" style="display: none">					
+					<input	type="text" name="rol" id="rol" th:field="*{role}" required/>
+					<label for="rol">Rol</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6" style="display: none">					
+					<input	type="text" name="activo" id="activo" th:field="*{activo}" required/>
+					<label for="activo">Activo</label>
+				</div>
+							
+				<div class="input-field col l6 col-m6" style="display: none">
+					<i class="material-icons prefix">person_add</i>
+					<input	type="text" name="usuario"	id="usuario" th:field="*{userName}" required/>
+					<label for="usuario">Usuario</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6" style="display: none">
+					<i class="material-icons prefix">folder_shared</i>
+					<input type="text" name="dni" id="dni" th:field="*{dni}" required />
+					<label for="dni">DNI</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6" style="display: none">
+					<i class="material-icons prefix">email</i>
+					<input type="email"	name="email" id="email" class="validate" th:field="*{email}" required />
+					<label for="email">Correo</label>
+					<span class="helper-text" data-error="Escriba un correo válido." data-success="Correo válido">Su correo es muy importante para contactarlo</span>
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">vpn_key</i>
+					<input	type="password" name="password"	id="password" th:field="*{password}" required/>
+					<label for="password">Password</label>
+				</div>
+				
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">account_circle</i>
+					<input type="text" name="nombre" id="nombre" th:field="*{nombre}" required />
+					<label for="nombre1">Nombre</label>
+				</div>
+								
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">account_circle</i>
+					<input type="text" name="apellido1" id="apellido1" th:field="*{apellido1}" required />
+					<label for="apellido1">Apellido 1</label>
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">account_circle</i>
+					<input type="text" name="apellido2" id="apellido2" th:field="*{apellido2}" required />
+					<label for="apellido2">Apellido 2</label>
+				</div>
+				
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">date_range</i>
+					<input class="datepicker" type="text" name="fecha_nacimiento" id="fecha_nacimiento" th:field="*{fecha_nacimiento}" required />
+					<label for="fecha_nacimiento">Fecha de nacimiento</label>
+				</div>
+				
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">phone</i>
+					<input type="text" name="telefono" id="telefono" th:field="*{telefono}" required />
+					<label	for="telefono">Teléfono</label>					
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l3 col-m3">
+					<i class="material-icons prefix">directions</i>
+					<input type="text" name="ciudad" id="ciudad" th:field="*{ciudad}" required />
+					<label	for="ciudad">Ciudad</label>					
+				</div>
+				
+				<div class="input-field col l9 col-m9">
+					<i class="material-icons prefix">map</i>
+					<input type="text" name="direccion" id="direccion" th:field="*{direccion}" required />
+					<label	for="direccion">Dirección</label>
+				</div>
+				
+				<div class="clearfix"></div>
+				<button type="submit" class="btn waves-effect right" id="enviar" name="enviar">
+					<i class="material-icons right">check</i> Modificar Usuario
+				</button>
+			</form>
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+<script defer type="text/javascript">
+	window.onload = iniciar;
+
+	function iniciar() {
+		document.getElementById("enviar").addEventListener("click", validar, false);
+	}
+	
+	function v_usuario() {
+	  let elemento = document.getElementById("usuario");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	  	alert("Campo Usuario Incorrecto (Solo carácteres A-Z)");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_pass() {
+	  let elemento = document.getElementById("password");	  
+	  if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(elemento.value)) {
+	  	alert("Campo Contraseña Incorrecto. (La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. NO puede tener otros símbolos.)");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_nombre() {
+	  let elemento = document.getElementById("nombre");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	  	alert("Campo Nombre Incorrecto. (Solo carácteres A-Z)");
+	  	return false;
+	  }
+	  return true;
+	}
+
+	function v_apellido1() {
+	  let elemento = document.getElementById("apellido1");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	    alert("Campo Apellido 1 Incorrecto. (Solo carácteres A-Z)");
+	    return false;
+	  }
+	  return true;
+	}
+	
+	function v_apellido2() {
+	  let elemento = document.getElementById("apellido2");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	    alert("Campo Apellido 2 Incorrecto. (Solo carácteres A-Z)");
+	    return false;
+	  }
+	  return true;
+	}
+
+	function v_fecha() {
+		let elemento = document.getElementById("fecha_nacimiento");  
+		if (!/^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/.test(elemento.value)) {
+    		alert("Fecha de Nacimiento Incorrecta. (dd/mm/aaaa)");
+    		return false;
+		}
+  		return true;
+	}
+	
+	function v_telef() {
+		let elemento = document.getElementById("telefono");  
+		if (!/^[6-7]\d{8}$/.test(elemento.value)) {
+    		alert("Teléfono Incorrecto. (664221774 - 754122944)");    
+    		return false;
+		}
+  		return true;
+	}
+	
+	function v_dni() {
+		let elemento = document.getElementById("dni");  
+		if (!/^([0-9]{8})([A-Z])$/.test(elemento.value)) {
+    		alert("DNI Incorrecto. (33149466D)");    
+    		return false;
+		}
+  		return true;
+	}
+	
+	function v_email() {
+	  let elemento = document.getElementById("nombre");	  
+	  if (!/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(elemento.value)) {
+	  	alert("Campo Email Incorrecto");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_ciudad() {
+	  let elemento = document.getElementById("ciudad");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	  	alert("Campo Ciudad Incorrecto. (Solo carácteres A-Z)");
+	  	return false;
+	  }
+	  return true;
+	}
+
+	function validar(e) {
+  		if (v_usuario()
+  			&& v_pass()
+  			&& v_dni()
+  			&& v_nombre()
+  			&& v_apellido1()
+  			&& v_apellido2()
+  			&& v_fecha()
+  			&& v_telef()  			  			
+  			&& v_ciudad()
+  			&& confirm("Pulsa aceptar si deseas enviar el formulario.")) {
+    		return true;
+  		} else {
+    		e.preventDefault();
+    		return false;
+  		}
+	}
+	
+</script>
+</html>

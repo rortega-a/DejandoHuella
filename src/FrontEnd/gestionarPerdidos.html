@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Gestión Animales Perdidos')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+		
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" style="font-weight: bold">Gestión de Animales Perdidos</h4>
+			
+			<ul class="collection" th:each="a : ${animalPerdidoLista}">			
+				<li class="collection-item avatar" >			      
+			      <img th:src="@{'/fotos/' + ${a.getFoto()}}" alt="" class="circle">
+			      <span class="title" th:text="${a.getNombre()}"></span>
+			      
+			      <p th:text="${a.getCiudad()}"></p>
+			      <p th:text="${'Responsable: ' + a.getUsuario().getNombre() + ' ' + a.getUsuario().getApellido1() + ' ' + a.getUsuario().getApellido2()}"></p>
+			      
+			      <p class="green-text accent-3" th:if="${a.isAdoptado() == true}" style="font-weight: bold">Encontrado</p>
+			      <p class="red-text accent-3" th:if="${a.isAdoptado() == false}" style="font-weight: bold">En busqueda</p>
+			      
+			      <a th:href="@{'/admin/desactivarPerdido?animal='+${a.getId_animal()}}" th:if="${a.isAdoptado() == true}">Marcar -> En Busqueda</a>
+			      <a th:href="@{'/admin/activarPerdido?animal='+${a.getId_animal()}}" th:if="${a.isAdoptado() == false}">Marcar -> Encontrado</a>
+			      			      
+			      <a th:href="@{'/admin/borrarPerdido?animal='+${a.getId_animal()}}" class="secondary-content"><i class="material-icons">delete</i></a>
+			      			      		      
+			     </li>
+			</ul>
+			
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>

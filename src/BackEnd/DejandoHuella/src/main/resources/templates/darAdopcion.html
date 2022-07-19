@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Dar Adopción')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+
+	<!-- Dropdown Structure CENTRO -->
+	<ul th:replace="fragments/parts::dropdown3"></ul>
+	<!-- Dropdown Structure CENTRO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown4"></ul>
+
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" th:text="'Dar a -' + ${animalCentroBD.getNombre()} + '- en Adopción'" style="font-weight: bold"></h4>
+			
+			<!-- <h4 class="center" th:text="'Animales en Adopción del Centro '+ ${centro.getNombre()}" style="font-weight: bold"></h4> -->
+			
+			<form th:action="@{/centro/darAdopcion}" th:object="${adopcionDTO}" method="post">
+							
+				<div class="clearfix"></div>
+				<div class="input-field col offset-l3 l6 col-m6">
+					<i class="material-icons prefix">account_circle</i>
+				    <select id="usuario" name="usuario" th:field="*{idUsuario}" >
+				    	<option th:each="u : ${usuariosLista}" th:text="${u.getNombre() + ' ' + u.getApellido1() + ' ' + u.getApellido2() + ' - ' + u.getDni()}" th:value="${u.getId_rol()}"></option>				      	
+				    </select>
+				    <label for="tamano">Usuario</label>
+			  	</div>
+			  	
+			  	<div class="clearfix"></div>				
+				<div class="input-field col offset-l3 l6 col-m6">
+					<i class="material-icons prefix">pets</i> 
+					<input type="text" name="idAnimal" id="idAnimal" th:field="*{idAnimal}" readonly />
+					<label for="fecha_adopcion">Identificador del Animal</label>				
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="input-field col offset-l3 l3 col-m3">
+					<i class="material-icons prefix">date_range</i>
+					<input	class="datepicker" type="text" name="fecha_adopcion" id="fecha_adopcion" th:field="*{fecha_adopcion}" required />
+					<label for="fecha_adopcion">Fecha de Adopción</label>
+				</div>
+												
+				<div class="clearfix"></div>
+				<button type="submit" class="btn waves-effect right" name="enviar" id="enviar">
+					<i class="material-icons right">check</i>Dar Adopción
+				</button>
+			</form>
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+<script defer type="text/javascript">
+	window.onload = iniciar;
+
+	function iniciar() {
+		document.getElementById("enviar").addEventListener("click", validar, false);
+	}
+	
+	function v_fecha() {
+		let elemento = document.getElementById("fecha_adopcion");  
+		if (!/^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/.test(elemento.value)) {
+    		alert("Fecha Adopción Incorrecta. (dd/mm/aaaa)");
+    		return false;
+		}
+  		return true;
+	}
+	
+	function validar(e) {
+  		if (v_fecha() && confirm("Pulsa aceptar si deseas enviar el formulario.")) {
+    		return true;
+  		} else {
+    		e.preventDefault();
+    		return false;
+  		}
+	}
+	
+</script>
+</html>

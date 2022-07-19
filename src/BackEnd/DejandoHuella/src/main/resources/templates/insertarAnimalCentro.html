@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Insertar Animal Adopción')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">	
+	
+	<!-- Dropdown Structure CENTRO -->
+	<ul th:replace="fragments/parts::dropdown3"></ul>
+	<!-- Dropdown Structure CENTRO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown4"></ul>
+
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" style="font-weight: bold">Insertar Animal Adopción</h4>
+			
+			<form th:action="@{/centro/insertarAnimalAdopcion}" th:object="${animalCentro}" method="post" enctype="multipart/form-data">
+			
+				<div class="clearfix"></div>
+				<div class="input-field col l6 col-m6" style="display: none">
+					<i class="material-icons prefix">person_add</i>
+					<input	type="text" name="centro"	id="centro" th:field="*{id_centro}" required/>
+					<label for="centro">Centro</label>
+				</div>
+			
+				<div class="clearfix"></div>
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">pets</i>
+					<input type="text" name="nombre" id="nombre" th:field="*{nombre}" required />
+					<label for="nombre1">Nombre</label>
+				</div>
+								
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">sports_baseball</i>
+					<input type="text" name="raza" id="raza" th:field="*{raza}" required />
+					<label for="raza">Raza</label>
+				</div>
+				
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">sentiment_very_satisfied</i>
+					<input type="text" name="caracter" id="caracter" th:field="*{caracter}" required />
+					<label	for="ciudad">Caracter</label>					
+				</div>	
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l3 col-m3">
+					<i class="material-icons prefix">date_range</i>
+					<input	class="datepicker" type="text" name="fecha_nacimiento" id="fecha_nacimiento" th:field="*{fecha_nacimiento}" required />
+					<label for="fecha_nacimiento">Fecha de nacimiento</label>
+				</div>
+				
+				<div class="input-field col l3 col-m3">
+					<i class="material-icons prefix">scale</i>
+					<input type="number" name="peso" id="peso" th:field="*{peso}" required />
+					<label	for="peso">Peso (Kg)</label>					
+				</div>
+				
+				<div class="input-field col l3 col-m3">
+					<i class="material-icons prefix">info</i>
+				    <select id="tamano" name="tamano" th:field="*{tamano}">
+				    	<option th:text="${'Pequeño'}" th:value="${'Pequeño'}"></option>
+				      	<option th:text="${'Mediano'}" th:value="${'Mediano'}"></option>
+				      	<option th:text="${'Grande'}" th:value="${'Grande'}"></option>
+				    </select>
+				    <label for="tamano">Tamaño</label>
+			  	</div>
+			  	
+			  	<div class="input-field col l3 col-m3">
+					<i class="material-icons prefix">euro</i>
+					<input type="number" name="costes_adopcion" id="costes_adopcion" th:field="*{costes_adopcion}" required />
+					<label	for="costes_adopcion">Costes Adopción (€)</label>					
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l12 col-m12">
+					<i class="material-icons prefix">search</i>
+					<textarea class="materialize-textarea" data-length="150" name="observaciones" id="observaciones" th:field="*{observaciones}" required></textarea>					
+					<label for="observaciones">Observaciones de los Costes de Adopción</label>
+				</div>
+			  	
+			  	<div class="clearfix"></div>
+			  	<div class="input-field col l12 col-m12">
+					<i class="material-icons prefix">history_edu</i>					
+					<textarea class="materialize-textarea" data-length="350" name="historia" id="historia" th:field="*{historia}" required></textarea>
+					<label	for="historia">Historia del Animal</label>					
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="file-field input-field col l6 col-m6">				
+					<div class="btn">
+				        <span>Foto</span>
+				        <input type="file" name="file" id="foto" required>
+				    </div>
+				    <div class="file-path-wrapper">
+				    	<input class="file-path validate" type="text">
+				    </div>									
+				</div>
+												
+				<div class="clearfix"></div>
+				<button type="submit" class="btn waves-effect right">
+					<i class="material-icons right">check</i> Insertar Animal Centro
+				</button>
+			</form>
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>

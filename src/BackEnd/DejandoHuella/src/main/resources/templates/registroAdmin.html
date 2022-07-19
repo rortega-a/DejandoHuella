@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Registro Usuarios')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+	
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<!-- PRINCIPAL -->
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" style="font-weight: bold">Registro Administrador</h4>
+			
+			<form th:action="@{/admin/registroAdmin}" th:object="${rolAdmin}" method="post">
+			
+				<div class="clearfix"></div>
+				<div class="input-field col l6 col-m6">
+					<i class="material-icons prefix">person_add</i>
+					<input	type="text" name="usuario"	id="usuario" th:field="*{usuario}" required/>
+					<label for="usuario">Usuario</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6">
+					<i class="material-icons prefix">vpn_key</i>
+					<input	type="password" name="password"	id="password" th:field="*{password}" required/>
+					<label for="password">Password</label>
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l6 col-m6">
+					<i class="material-icons prefix">account_circle</i>
+					<input type="text" name="nombre" id="nombre" th:field="*{nombre}" required />
+					<label for="nombre1">Nombre</label>
+				</div>
+								
+				<div class="input-field col l6 col-m6">
+					<i class="material-icons prefix">account_circle</i>
+					<input type="text" name="apellido1" id="apellido1" th:field="*{apellido1}" required />
+					<label for="apellido1">Apellido 1</label>
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l6 col-m6">
+					<i class="material-icons prefix">account_circle</i>
+					<input type="text" name="apellido2" id="apellido2" th:field="*{apellido2}" required />
+					<label for="apellido2">Apellido 2</label>
+				</div>
+								
+				<div class="input-field col l6 col-m6">
+					<i class="material-icons prefix">email</i>
+					<input type="email"	name="email" id="email" class="validate" th:field="*{email}" required />
+					<label for="email">Correo</label>
+					<span class="helper-text" data-error="Escriba un correo válido." data-success="Correo válido">Importante</span>
+				</div>
+				
+				<div class="clearfix"></div>
+				<div>
+					<h6 class="red-text right" th:if="${errorUser!=null}" th:text="${'Error: Nombre de Usuario existente.'}"></h6>
+					<h6 class="red-text right" th:if="${errorEmail!=null}" th:text="${'Error: Email ya registrado.'}"></h6>					
+				</div>
+				
+				<div class="clearfix"></div>
+				<button type="submit" class="btn waves-effect right" name="enviar" id="enviar">
+					<i class="material-icons right">check</i> Registrar Administrador
+				</button>
+			</form>
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+<script defer type="text/javascript">
+	window.onload = iniciar;
+
+	function iniciar() {
+		document.getElementById("enviar").addEventListener("click", validar, false);
+	}
+	
+	function v_usuario() {
+	  let elemento = document.getElementById("usuario");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	  	alert("Campo Usuario Incorrecto (Solo carácteres A-Z)");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_pass() {
+	  let elemento = document.getElementById("password");	  
+	  if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(elemento.value)) {
+	  	alert("Campo Contraseña Incorrecto. (La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. NO puede tener otros símbolos.)");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_nombre() {
+	  let elemento = document.getElementById("nombre");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	  	alert("Campo Nombre Incorrecto. (Solo carácteres A-Z)");
+	  	return false;
+	  }
+	  return true;
+	}
+
+	function v_apellido1() {
+	  let elemento = document.getElementById("apellido1");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	    alert("Campo Apellido 1 Incorrecto. (Solo carácteres A-Z)");
+	    return false;
+	  }
+	  return true;
+	}
+	
+	function v_apellido2() {
+	  let elemento = document.getElementById("apellido2");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	    alert("Campo Apellido 2 Incorrecto. (Solo carácteres A-Z)");
+	    return false;
+	  }
+	  return true;
+	}
+		
+	function v_email() {
+	  let elemento = document.getElementById("nombre");	  
+	  if (!/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(elemento.value)) {
+	  	alert("Campo Email Incorrecto");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function validar(e) {
+  		if (v_usuario()
+  			&& v_pass()  			
+  			&& v_nombre()
+  			&& v_apellido1()
+  			&& v_apellido2()  			
+  			&& confirm("Pulsa aceptar si deseas enviar el formulario.")) {
+    		return true;
+  		} else {
+    		e.preventDefault();
+    		return false;
+  		}
+	}	
+</script>
+</html>
