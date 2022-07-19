@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Links Amigos')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+	<!-- Dropdown Structure USUARIO -->
+	<ul th:replace="fragments/parts::dropdown1"></ul>
+	<!-- Dropdown Structure USUARIO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown2"></ul>
+	
+	<!-- Dropdown Structure CENTRO -->
+	<ul th:replace="fragments/parts::dropdown3"></ul>
+	<!-- Dropdown Structure CENTRO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown4"></ul>
+
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+						
+			<h4 class="center">Webs Amigas</h4>
+			
+			<ul class="collection">			
+				<li class="collection-item avatar" >			      
+			      <img src="../img/amigo1.jpg" alt="" class="circle">
+			      <span class="title">Galgo Podenco Support</span>
+			      <p></p>     
+			      <a href="http://www.galgopodencosupport.org/">Visitar Web</a>			      			      		      
+			    </li>
+			</ul>
+			<ul class="collection">
+			    <li class="collection-item avatar" >			      
+			      <img src="../img/amigo2.jpg" alt="" class="circle">
+			      <span class="title">Greyhounds Rescue Holland</span>
+			      <p></p>     
+			      <a href="http://www.greyhoundsrescue.nl/">Visitar Web</a>			      			      		      
+			    </li>
+			</ul>
+			<ul class="collection">
+			    <li class="collection-item avatar" >			      
+			      <img src="../img/amigo3.jpg" alt="" class="circle">
+			      <span class="title">Bodegueros Sans Chaine</span>
+			      <p></p>     
+			      <a href="https://bodegueros-sans-chaine.com/">Visitar Web</a>			      			      		      
+			    </li>
+			</ul>
+			
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>

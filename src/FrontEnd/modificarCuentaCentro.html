@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Modificar Centro')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+	
+	<!-- Dropdown Structure CENTRO -->
+	<ul th:replace="fragments/parts::dropdown3"></ul>
+	<!-- Dropdown Structure CENTRO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown4"></ul>
+
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" style="font-weight: bold">Modificación Centro Adopción</h4>
+			
+			<form th:action="@{/centro/modificarCuentaCentro}" th:object="${centro}" method="post">
+			
+				 <div class="input-field col l6 col-m6" style="display: none">					
+					<input	type="text" name="id_rol" id="id_rol" th:field="*{id_rol}" required/>
+					<label for="id_rol">Id Centro Adopción</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6" style="display: none">					
+					<input	type="text" name="role" id="role" th:field="*{role}" required/>
+					<label for="role">Rol</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6" style="display: none">					
+					<input	type="text" name="activo" id="activo" th:field="*{activo}" required/>
+					<label for="activo">Activo</label>
+				</div>
+							
+				<div class="input-field col l6 col-m6" style="display: none">
+					<i class="material-icons prefix">person_add</i>
+					<input	type="text" name="userName"	id="userName" th:field="*{userName}" required/>
+					<label for="userName">Usuario</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6" style="display: none">
+					<i class="material-icons prefix">folder_shared</i>
+					<input type="text" name="nif" id="nif" th:field="*{nif}" required />
+					<label for="nif">NIF</label>
+				</div>
+				
+				<div class="input-field col l4 col-m4" style="display: none">
+					<i class="material-icons prefix">email</i>
+					<input type="email"	name="email" id="email" class="validate" th:field="*{email}" required />
+					<label for="email">Correo</label>
+					<span class="helper-text" data-error="Escriba un correo válido." data-success="Correo válido">Su correo es muy importante para contactarlo</span>
+				</div>
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">vpn_key</i>
+					<input	type="password" name="password"	id="password" th:field="*{password}" required/>
+					<label for="password">Password</label>
+				</div>
+				
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">account_circle</i>
+					<input type="text" name="nombre" id="nombre" th:field="*{nombre}" required />
+					<label for="nombre1">Nombre del Centro</label>
+				</div>
+								
+				<div class="input-field col l3 col-m3">
+					<i class="material-icons prefix">phone</i>
+					<input type="text" name="telefono" id="telefono" th:field="*{telefono}" required />
+					<label	for="telefono">Teléfono</label>					
+				</div>
+				
+				<div class="clearfix"></div>	
+				<div class="input-field col l3 col-m3">
+					<i class="material-icons prefix">directions</i>
+					<input type="text" name="ciudad" id="ciudad" th:field="*{ciudad}" required />
+					<label	for="ciudad">Ciudad</label>					
+				</div> 
+				
+				<div class="input-field col l6 col-m6">
+					<i class="material-icons prefix">map</i>
+					<input type="text" name="direccion" id="direccion" th:field="*{direccion}" required />
+					<label	for="direccion">Dirección</label>
+				</div> 
+				
+				<div class="clearfix"></div>
+				<button type="submit" class="btn waves-effect right" id="enviar" name="enviar">
+					<i class="material-icons right">check</i> Modificar Centro Adopción
+				</button>
+			</form>
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+<script defer type="text/javascript">
+	window.onload = iniciar;
+
+	function iniciar() {
+		document.getElementById("enviar").addEventListener("click", validar, false);
+	}
+	
+	function v_usuario() {
+	  let elemento = document.getElementById("usuario");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	  	alert("Campo Usuario Incorrecto (Solo carácteres A-Z)");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_pass() {
+	  let elemento = document.getElementById("password");	  
+	  if (!/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(elemento.value)) {
+	  	alert("Campo Contraseña Incorrecto. (La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. NO puede tener otros símbolos.)");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_nombre() {
+	  let elemento = document.getElementById("nombre");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	  	alert("Campo Nombre del Centro Incorrecto. (Solo carácteres A-Z)");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_telef() {
+		let elemento = document.getElementById("telefono");  
+		if (!/^[6-7]\d{8}$/.test(elemento.value)) {
+    		alert("Teléfono Incorrecto. (664221774 - 754122944)");    
+    		return false;
+		}
+  		return true;
+	}
+	
+	function v_nif() {
+		let elemento = document.getElementById("nif");  
+		if (!/^([0-9]{8})([A-Z])$/.test(elemento.value)) {
+    		alert("NIF Incorrecto. (11223344F)");    
+    		return false;
+		}
+  		return true;
+	}
+	
+	function v_email() {
+	  let elemento = document.getElementById("nombre");	  
+	  if (!/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(elemento.value)) {
+	  	alert("Campo Email Incorrecto");
+	  	return false;
+	  }
+	  return true;
+	}
+	
+	function v_ciudad() {
+	  let elemento = document.getElementById("ciudad");	  
+	  if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(elemento.value)) {
+	  	alert("Campo Ciudad Incorrecto. (Solo carácteres A-Z)");
+	  	return false;
+	  }
+	  return true;
+	}
+
+	function validar(e) {
+  		if (v_usuario()
+  			&& v_pass()
+  			&& v_nif()
+  			&& v_nombre()  			
+  			&& v_telef()  			  			
+  			&& v_ciudad()
+  			&& confirm("Pulsa aceptar si deseas enviar el formulario.")) {
+    		return true;
+  		} else {
+    		e.preventDefault();
+    		return false;
+  		}
+	}
+	
+</script>
+</html>

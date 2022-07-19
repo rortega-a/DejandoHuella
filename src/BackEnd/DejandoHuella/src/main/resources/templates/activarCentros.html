@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Activar Centros Adopción')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+		
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" style="font-weight: bold">Activar Centros de Adopción</h4>
+			
+			 <ul class="collection" th:each="c : ${centrosAdopcionLista}" th:if="${c.isActivo() == false}">			
+				<li class="collection-item avatar" >			      
+			      <img src="../img/logo.png" alt="" class="circle">
+			      <span class="title" th:text="${c.getNombre()}"></span>
+			      
+			      <p th:text="${c.getCiudad() + ', ' + c.getDireccion()}"></p>
+			      <p th:text="${c.getNif()}"></p>
+			      
+			      <p class="green-text accent-3" th:if="${c.isActivo() == true}" style="font-weight: bold">Confirmado</p>
+			      <p class="red-text accent-3" th:if="${c.isActivo() == false}" style="font-weight: bold">Esperando Confirmación</p> 
+			      			      			      
+			      <a th:href="@{'/admin/confirmarCentro?centro='+${c.getId_rol()}}" class="secondary-content" th:if="${c.isActivo() == false}"><i class="material-icons">task_alt</i></a> 		      
+			     </li>
+			</ul>
+			
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>

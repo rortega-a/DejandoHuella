@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Main')">
+	<meta charset="UTF-8" />
+</head>
+<body>
+	<!-- Dropdown Structure USUARIO -->
+	<ul th:replace="fragments/parts::dropdown1"></ul>
+	<!-- Dropdown Structure USUARIO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown2"></ul>
+	
+	<!-- Dropdown Structure CENTRO -->
+	<ul th:replace="fragments/parts::dropdown3"></ul>
+	<!-- Dropdown Structure CENTRO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown4"></ul>
+
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+
+	<!-- CARRUSEL DE IMAGENES -->
+	<div th:replace="fragments/parts::carrusel"></div>
+
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>

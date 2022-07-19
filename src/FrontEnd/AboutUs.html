@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='About Us')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+	<!-- Dropdown Structure USUARIO -->
+	<ul th:replace="fragments/parts::dropdown1"></ul>
+	<!-- Dropdown Structure USUARIO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown2"></ul>
+	
+	<!-- Dropdown Structure CENTRO -->
+	<ul th:replace="fragments/parts::dropdown3"></ul>
+	<!-- Dropdown Structure CENTRO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown4"></ul>
+
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px; font-family: 'Open Sans', sans-serif">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+						
+			<h4 class="center"><u>Sobre Nosotros</u></h4>
+			
+			<p class="flow-text">
+			La asociación protectora <b>DEJANDO HUELLA</b> se funda en Sevilla el 1 de Marzo de 2022 por un grupo de personas que,
+			habiendo colaborado con otras protectoras y refugios y sabiendo las dificultades por las que estos pasan para
+			mantener un número de animales sostenible, debido a la enorme cantidad de abandonos que se producen, deciden
+			ofrecer una alternativa.
+			</p>
+			<p class="flow-text">
+			<b>DEJANDO HUELLA</b> nace por tanto de la necesidad de buscar una solución al hacinamiento de los refugios tradicionales,
+			bien manteniendo nuestros perros en residencias o bien ayudando a que quienes encuentran animales abandonados
+			y maltratados puedan hacerse cargo de ellos en sus propias casas hasta encontrarles familia definitiva.
+			</p>
+			
+			<p class="flow-text"><b>Para contactar con nosotros puedes escribir a:</b> <u>info@dejando-huella.org</u></p>
+			
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>

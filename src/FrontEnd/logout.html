@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Logout</title>
+
+<!-- Archivo CSS -->
+<link rel="stylesheet" type="text/css" href="css/login.css" />
+
+<!-- Iconos Materialize -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body class="bodyLogin">
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m12 l8 offset-l2 loginDiv">
+				<div class="row loginContainer">
+					<div class="col s12 m6 l6">
+						<div class="col s11 offset-s1">
+							<img src="img/logo.png" class="responsive-img" />
+						</div>
+					</div>
+					<div class="col s12 m5 l5 offset-1">
+						<div class="loginTitle">
+							<form th:action="@{/logout}" method="post">
+								<h5>Cerrar Sesión</h5>
+								<div class="row"></div>
+								<div class="row">
+									<button class="btn col s12 m12 l12 bLogin red accent-3"
+										type="submit">SALIR</button>
+								</div>
+								<div class="row">
+									<a th:href="@{/}">Volver a Inicio</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

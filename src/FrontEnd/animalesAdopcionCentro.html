@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Animales Adopción Centro')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+		
+	<!-- Dropdown Structure CENTRO -->
+	<ul th:replace="fragments/parts::dropdown3"></ul>
+	<!-- Dropdown Structure CENTRO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown4"></ul>
+
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" th:text="'Animales en Adopción del Centro '+ ${centro.getNombre()}" style="font-weight: bold"></h4>
+			
+			<ul class="collection" th:each="c : ${centro.getAnimalesCentro()}">
+			    <li class="collection-item avatar" >
+			      <img th:src="@{'/fotos/' + ${c.getFoto()}}" alt="" class="circle">
+			      <span class="title" th:text="${c.getNombre()}"></span>
+			      <p th:text="${c.getHistoria()}"></p>
+			      <p class="green-text accent-3" th:if="${c.isAdoptado() == true}" style="font-weight: bold">Adoptado</p>
+			      <p class="red-text accent-3" th:if="${c.isAdoptado() == false}" style="font-weight: bold">En Adopción</p>
+			      
+			      <a th:href="@{'/centro/darAdopcion?animal='+${c.getId_animal()}}" th:if="${c.isAdoptado() == false}">Dar en Adopción a Usuario /</a>
+			      <a th:href="@{'/centro/modificarAnimalCentro?animal='+${c.getId_animal()}}">Modificar Animal</a>
+			      
+			      <a th:href="@{'/centro/borrarAnimalCentro?animal='+${c.getId_animal()}}" class="secondary-content"><i class="material-icons">delete</i></a>			      			      
+			    </li>			    
+			</ul>
+			
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>

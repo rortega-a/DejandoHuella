@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Gestión Centros/Usuarios')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+		
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h3 class="center" style="font-weight: bold">Gestión de Centros de Adopción y Usuarios</h3>
+			
+			<h4 class="center" th:if="${centrosLista.size} > 0" style="font-weight: bold">Centros de Adopción</h4>
+			
+			<ul class="collection" th:each="c : ${centrosLista}">			
+				<li class="collection-item avatar" >			      
+			      <img src="../img/centro.png" alt="" class="circle">
+			      <span class="title" th:text="${c.getNombre()}"></span>
+			      
+			      <p th:text="${c.getCiudad() + ', ' + c.getDireccion()}"></p>
+			      <p th:text="${c.getNif()}"></p>
+			      
+			      <p class="green-text accent-3" th:if="${c.isActivo() == true}" style="font-weight: bold">Cuenta Activa</p>
+			      <p class="red-text accent-3" th:if="${c.isActivo() == false}" style="font-weight: bold">Esperando Confirmación</p>
+			      
+			      <a th:href="@{'/admin/desactivarCentro?centro='+${c.getId_rol()}}" th:if="${c.isActivo() == true}">Desactivar Centro</a>
+			      			      
+			      <a th:href="@{'/admin/borrarCentro?centro='+${c.getId_rol()}}" class="secondary-content"><i class="material-icons">delete</i></a>
+			      			      		      
+			     </li>
+			</ul>
+			
+			<h4 class="center" th:if="${usuariosLista.size} > 0" style="font-weight: bold">Usuarios</h4>
+			
+			<ul class="collection" th:each="u : ${usuariosLista}">			
+				<li class="collection-item avatar" >			      
+			      <img src="../img/usuario.jpg" alt="" class="circle">
+			      <span class="title" th:text="${u.getNombre() + ' ' + u.getApellido1() + ' ' + u.getApellido2()}"></span>
+			      
+			      <p th:text="${u.getCiudad() + ', ' + u.getDireccion()}"></p>
+			      <p th:text="${u.getDni()}"></p>
+			      
+			      <p class="green-text accent-3" th:if="${u.isActivo() == true}" style="font-weight: bold">Cuenta Activa</p>
+			      <p class="red-text accent-3" th:if="${u.isActivo() == false}" style="font-weight: bold">Cuenta Desactivada</p>
+			      
+			      <a th:href="@{'/admin/desactivarUsuario?usuario='+${u.getId_rol()}}" th:if="${u.isActivo() == true}">Desactivar Usuario</a>
+			      <a th:href="@{'/admin/activarUsuario?usuario='+${u.getId_rol()}}" th:if="${u.isActivo() == false}">Activar Usuario</a>
+			      
+			      <a th:href="@{'/admin/borrarUsuario?usuario='+${u.getId_rol()}}"class="secondary-content"><i class="material-icons">delete</i></a>
+			       		      
+			     </li>
+			</ul>
+			
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>

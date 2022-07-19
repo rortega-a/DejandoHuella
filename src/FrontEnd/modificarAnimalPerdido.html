@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/parts::head(title='Modificar Animal Perdido')">
+	<meta charset="UTF-8" />
+</head>
+<body class="indigo lighten-5">
+		
+	<!-- Dropdown Structure USUARIO -->
+	<ul th:replace="fragments/parts::dropdown1"></ul>
+	<!-- Dropdown Structure USUARIO MOVIL -->
+	<ul th:replace="fragments/parts::dropdown2"></ul>
+	
+	<!-- NAVBAR -->
+	<nav th:replace="fragments/parts::navbar"></nav>
+
+	<!-- SIDENAV Structure ADAPTACION MOVILES -->
+	<ul th:replace="fragments/parts::sidenav"></ul>
+	
+	<br />
+	<div class="container white" style="min-height: 60vh; padding: 20px">
+		<!-- CONTAINER -->
+		<div class="row">
+			<!-- ROW -->
+			
+			<h4 class="center" style="font-weight: bold">Modificar Animal Perdido</h4>
+			
+			<form th:action="@{/usuario/modificarAnimalPerdido}" th:object="${animalPerdidoBD}" method="post" >
+			
+				<div class="clearfix"></div>
+				<div class="input-field col l6 col-m6" style="display: none">
+					<i class="material-icons prefix">person_add</i>
+					<input	type="text" name="usuario"	id="usuario" th:field="*{usuario}" required/>
+					<label for="usuario">Usuario</label>
+				</div>
+				
+				<div class="input-field col l6 col-m6" style="display: none">
+					<i class="material-icons prefix">person_add</i>
+					<input	type="text" name="id_animal"	id="id_animal" th:field="*{id_animal}" required/>
+					<label for="usuario">ID Animal</label>
+				</div>
+			
+				<div class="clearfix"></div>
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">pets</i>
+					<input type="text" name="nombre" id="nombre" th:field="*{nombre}" required />
+					<label for="nombre1">Nombre</label>
+				</div>
+								
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">sports_baseball</i>
+					<input type="text" name="raza" id="raza" th:field="*{raza}" required />
+					<label for="raza">Raza</label>
+				</div>
+				
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">map</i>
+					<input type="text" name="ciudad" id="ciudad" th:field="*{ciudad}" required />
+					<label	for="ciudad">Ciudad</label>					
+				</div>	
+				
+				<div class="clearfix"></div>
+				<div class="input-field col l12 col-m12">
+					<i class="material-icons prefix">search</i>
+					<textarea class="materialize-textarea" data-length="350" name="observaciones" id="observaciones" th:field="*{observaciones}" required></textarea>					
+					<label for="observaciones">Observaciones</label>
+				</div>	
+				
+				<div class="clearfix"></div>
+				<div class="file-field input-field col l6 col-m6" style="display: none">	
+					<i class="material-icons prefix">camera</i>
+					<input type="text" name="file" id="foto" th:field="*{foto}" required />
+					<label	for="foto">Foto</label>	
+				</div>
+				
+				<div class="input-field col l4 col-m4">
+					<i class="material-icons prefix">info</i>
+				    <select id="adoptado" name="adoptado" th:field="*{adoptado}">
+				    	<option th:text="${'En Busqueda'}" th:value="${'0'}"></option>
+				      	<option th:text="${'Encontrado'}" th:value="${'1'}"></option>
+				    </select>
+				    <label for="adoptado">En Busqueda / Encontrado</label>
+			  	</div>
+												
+				<div class="clearfix"></div>
+				<button type="submit" class="btn waves-effect right">
+					<i class="material-icons right">check</i> Modificar Animal Perdido
+				</button>
+			</form> 
+			
+		</div>
+		<!-- ROW -->
+	</div>
+	<!-- CONTAINER -->
+	<br />
+	<!-- FOOTER -->
+	<footer th:replace="fragments/parts::footer2"></footer>
+</body>
+<script th:replace="fragments/parts::scriptMat"></script>
+</html>
