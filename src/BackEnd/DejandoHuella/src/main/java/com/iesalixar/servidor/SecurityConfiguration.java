@@ -1,73 +1,59 @@
 package com.iesalixar.servidor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.iesalixar.servidor.services.JPAUserDetailsService;
+import org.springframework.security.web.SecurityFilterChain;
 
 /*
  * CLASE DONDE ESTABLECEREMOS LA CONFIGURACION DE
  * AUTENTIFICACION - CÓMO ACCEDO
  * AUTORIZACION - A QUÉ PUEDO ACCEDER
  * MÉTODO DE ENCRIPTACIÓN DE LAS CONTRASEÑAS
+ *
+ * AUTENTIFICACION: Spring Security usa automáticamente el único UserDetailsService
+ * (JPAUserDetailsService) junto al PasswordEncoder definido abajo.
  */
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
-
-	
-	/* Obtengo una refencia al SINGLENTON del userDetailsService	 * 
-	 */
-	@Autowired
-	JPAUserDetailsService userDetailsService;
-	
-	/* MÉTODO PARA AUTENTIFICAR LOS USUARIOS */
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		//La autentificación JPA no está incluido tenemos que configurarla nosotros
-		//Creando nuestro propio servicio que nos permita obtener la información del usuario
-		auth.userDetailsService(userDetailsService);
-	}
+public class SecurityConfiguration {
 
 	/*
 	 * MÉTODO PARA ESTABLECER AUTORIZACION - A QUÉ PUEDO ACCEDER
 	 */
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		
-		/* URL con información sobre ANT MATCHERS
-		 * https://www.baeldung.com/spring-security-expressions */
-		http.authorizeRequests()
-		.antMatchers("/").permitAll()
-		.antMatchers("/registroUsuarios").anonymous()
-		.antMatchers("/registroCentros").anonymous()
-		.antMatchers("/usuario/**").hasRole("USER")
-		.antMatchers("/admin/**").hasRole("ADMIN")
-		.antMatchers("/centro/**").hasRole("CENTRO")
-		.antMatchers("/logoutPage").authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.and()
-		.logout()
-		.logoutSuccessUrl("/");	
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+		http.authorizeHttpRequests(auth -> auth
+				.requestMatchers("/").permitAll()
+				.requestMatchers("/registroUsuarios").anonymous()
+				.requestMatchers("/registroCentros").anonymous()
+				.requestMatchers("/usuario/**").hasRole("USER")
+				.requestMatchers("/admin/**").hasRole("ADMIN")
+				.requestMatchers("/centro/**").hasRole("CENTRO")
+				.requestMatchers("/logoutPage").authenticated()
+				// Spring Security 6 deniega por defecto lo no listado: mantenemos el
+				// comportamiento anterior (recursos estáticos, /fotos, /login, /error...)
+				.anyRequest().permitAll())
+			.formLogin(form -> form
+				.loginPage("/login")
+				.permitAll())
+			.logout(logout -> logout
+				.logoutSuccessUrl("/"));
+
+		return http.build();
 	}
-	
+
 	/*
 	 * ESTABLECEMOS EL PASSWORD ENCODER. FUERZA 15 (de 4 a 31)
 	 */
 	@Bean
-    public PasswordEncoder getPasswordEncoder() {         
+	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder(15);
-    }
-	
+	}
+
 }

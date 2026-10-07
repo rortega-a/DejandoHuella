@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/parts::head(title='Insertar Animal Perdido')">
+<head th:replace="~{fragments/parts :: head(title='Insertar Animal Perdido')}">
 	<meta charset="UTF-8" />
 </head>
 <body class="indigo lighten-5">
 	
 	<!-- Dropdown Structure USUARIO -->
-	<ul th:replace="fragments/parts::dropdown1"></ul>
+	<ul th:replace="~{fragments/parts :: dropdown1}"></ul>
 	<!-- Dropdown Structure USUARIO MOVIL -->
-	<ul th:replace="fragments/parts::dropdown2"></ul>
+	<ul th:replace="~{fragments/parts :: dropdown2}"></ul>
 	
 	<!-- NAVBAR -->
-	<nav th:replace="fragments/parts::navbar"></nav>
+	<nav th:replace="~{fragments/parts :: navbar}"></nav>
 
 	<!-- SIDENAV Structure ADAPTACION MOVILES -->
-	<ul th:replace="fragments/parts::sidenav"></ul>
+	<ul th:replace="~{fragments/parts :: sidenav}"></ul>
 	
 	<br />
 	<div class="container white" style="min-height: 60vh; padding: 20px">
@@ -81,7 +81,7 @@
 	<!-- CONTAINER -->
 	<br />
 	<!-- FOOTER -->
-	<footer th:replace="fragments/parts::footer2"></footer>
+	<footer th:replace="~{fragments/parts :: footer2}"></footer>
 </body>
-<script th:replace="fragments/parts::scriptMat"></script>
+<script th:replace="~{fragments/parts :: scriptMat}"></script>
 </html>
